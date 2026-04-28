@@ -190,7 +190,11 @@
   <main class="game-container">
     <h1>Japanese Language Game</h1>
     <p class="subtitle">Choose the correct meaning of the Japanese word.</p>
-
+    <!-- Button -->
+    <button onclick="playAudio()">もったいない</button>
+    <!-- Audio file -->
+    <audio id="myAudio" src="audio.mp3"></audio>
+    
     <div class="level-select">
       <label for="level">Level: </label>
       <select id="level">
@@ -223,6 +227,11 @@
   </main>
 
   <script>
+    function playAudio() {
+      const audio = document.getElementById("myAudio");
+      audio.play();
+    }
+    
     const quizData = {
       easy: [
         { jp: "こんにちは", answer: "Hello", options: ["Hello", "Goodbye", "Thank you", "Sorry"] },
