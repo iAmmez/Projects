@@ -1,454 +1,396 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ฟิสิกส์มูลฐานสำหรับวิศวกร | FUNSC115</title>
+  <title>Japanese Language Game</title>
   <style>
-    :root {
-      --bg: #f6f8fb;
-      --card: #ffffff;
-      --primary: #1d4ed8;
-      --primary-dark: #1e3a8a;
-      --accent: #f59e0b;
-      --text: #172033;
-      --muted: #64748b;
-      --line: #e2e8f0;
-      --soft: #eff6ff;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
     }
-
-    * { box-sizing: border-box; }
 
     body {
-      margin: 0;
-      font-family: "Sarabun", "Noto Sans Thai", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-    }
-
-    header {
-      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 58%, #38bdf8 100%);
-      color: white;
-      padding: 28px 7% 70px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    header::after {
-      content: "";
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.12);
-      right: -150px;
-      top: -120px;
-    }
-
-    nav {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffe5ec, #e0f2fe);
       display: flex;
+      justify-content: center;
       align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      position: relative;
-      z-index: 1;
+      padding: 20px;
+      color: #1f2937;
     }
 
-    .brand {
-      font-weight: 800;
-      letter-spacing: .2px;
-      font-size: 1.1rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      color: rgba(255,255,255,.9);
-      text-decoration: none;
-      font-size: .95rem;
-    }
-
-    .hero {
-      max-width: 940px;
-      padding-top: 66px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,.15);
-      border: 1px solid rgba(255,255,255,.28);
-      border-radius: 999px;
-      padding: 8px 16px;
-      font-size: .95rem;
-      margin-bottom: 20px;
+    .game-container {
+      width: 100%;
+      max-width: 760px;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+      text-align: center;
     }
 
     h1 {
-      margin: 0;
-      font-size: clamp(2.1rem, 5vw, 4.5rem);
-      line-height: 1.15;
-      max-width: 900px;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      color: #db2777;
     }
 
     .subtitle {
-      margin: 18px 0 0;
-      font-size: 1.25rem;
-      color: rgba(255,255,255,.88);
-      max-width: 760px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 32px;
-    }
-
-    .btn {
-      display: inline-block;
-      text-decoration: none;
-      border-radius: 14px;
-      padding: 13px 20px;
-      font-weight: 700;
-      transition: .2s ease;
-    }
-
-    .btn-primary {
-      background: white;
-      color: var(--primary-dark);
-    }
-
-    .btn-secondary {
-      border: 1px solid rgba(255,255,255,.45);
-      color: white;
-    }
-
-    main {
-      width: min(1180px, 86%);
-      margin: -42px auto 70px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .quick-info {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 26px;
-    }
-
-    .info-card, section {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      box-shadow: 0 16px 35px rgba(15,23,42,.07);
-    }
-
-    .info-card {
-      padding: 22px;
-    }
-
-    .info-card span {
-      display: block;
-      color: var(--muted);
-      font-size: .9rem;
-      margin-bottom: 5px;
-    }
-
-    .info-card strong {
-      font-size: 1.22rem;
-      color: var(--primary-dark);
-    }
-
-    section {
-      padding: 34px;
+      color: #6b7280;
       margin-bottom: 24px;
     }
 
-    .section-title {
+    .stats {
       display: flex;
-      align-items: center;
+      justify-content: space-between;
       gap: 12px;
-      margin-bottom: 18px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
     }
 
-    .icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      background: var(--soft);
-      color: var(--primary);
-      font-weight: 800;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: 1.65rem;
-      color: #0f172a;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 24px;
-    }
-
-    .pill-list, .objective-list, .resource-list {
-      display: grid;
-      gap: 12px;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
-
-    .pill-list li, .objective-list li, .resource-list li {
-      padding: 14px 16px;
+    .stat-card {
+      flex: 1;
+      min-width: 140px;
+      background: #f9fafb;
       border-radius: 16px;
-      background: #f8fafc;
-      border: 1px solid var(--line);
+      padding: 14px;
+      font-weight: bold;
     }
 
-    .hours {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 14px;
+    .question-box {
+      background: #fdf2f8;
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 24px;
     }
 
-    .hour-box {
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 18px;
-      text-align: center;
-    }
-
-    .hour-box strong {
-      display: block;
-      color: var(--primary);
-      font-size: 2rem;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .timeline {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-
-    .week {
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 16px;
-      min-height: 135px;
-    }
-
-    .week .num {
-      display: inline-block;
-      background: var(--primary);
-      color: white;
-      border-radius: 999px;
-      padding: 3px 10px;
-      font-size: .82rem;
-      margin-bottom: 10px;
-    }
-
-    .assessment {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .score-card {
-      border-radius: 22px;
-      padding: 24px;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-      border: 1px solid var(--line);
-    }
-
-    .score {
-      font-size: 2.7rem;
-      font-weight: 900;
-      color: var(--primary);
-      line-height: 1;
+    .question-label {
+      font-size: 1rem;
+      color: #6b7280;
       margin-bottom: 12px;
     }
 
-    .consult {
+    .question {
+      font-size: 2.6rem;
+      font-weight: bold;
+      color: #111827;
+      margin-bottom: 10px;
+    }
+
+    .hint {
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      border: none;
+      border-radius: 16px;
+      padding: 16px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .choice-btn {
+      background: #eef2ff;
+      color: #1e1b4b;
+      font-weight: bold;
+    }
+
+    .choice-btn:hover {
+      background: #c7d2fe;
+      transform: translateY(-2px);
+    }
+
+    .correct {
+      background: #bbf7d0 !important;
+      color: #166534 !important;
+    }
+
+    .wrong {
+      background: #fecaca !important;
+      color: #991b1b !important;
+    }
+
+    .feedback {
+      min-height: 32px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .controls {
       display: flex;
-      flex-wrap: wrap;
+      justify-content: center;
       gap: 12px;
-      margin-top: 10px;
+      flex-wrap: wrap;
     }
 
-    .consult span {
-      background: var(--soft);
-      color: var(--primary-dark);
-      border-radius: 999px;
-      padding: 9px 14px;
-      font-weight: 700;
+    .main-btn {
+      background: #db2777;
+      color: white;
+      font-weight: bold;
     }
 
-    footer {
-      text-align: center;
-      color: var(--muted);
-      padding: 30px 7%;
-      border-top: 1px solid var(--line);
-      background: white;
+    .main-btn:hover {
+      background: #be185d;
     }
 
-    @media (max-width: 900px) {
-      .quick-info, .grid-2, .timeline, .assessment {
-        grid-template-columns: 1fr 1fr;
+    .secondary-btn {
+      background: #f3f4f6;
+      color: #374151;
+      font-weight: bold;
+    }
+
+    .secondary-btn:hover {
+      background: #e5e7eb;
+    }
+
+    .level-select {
+      margin-bottom: 20px;
+    }
+
+    select {
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid #d1d5db;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 560px) {
+      .game-container {
+        padding: 22px;
       }
-      .hours { grid-template-columns: 1fr; }
-    }
 
-    @media (max-width: 640px) {
-      header { padding-inline: 5%; }
-      main { width: 92%; }
-      nav { align-items: flex-start; flex-direction: column; }
-      .quick-info, .grid-2, .timeline, .assessment {
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      .question {
+        font-size: 2rem;
+      }
+
+      .choices {
         grid-template-columns: 1fr;
       }
-      section { padding: 24px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <div class="brand">FUNSC115</div>
-      <div class="nav-links">
-        <a href="#about">ข้อมูลรายวิชา</a>
-        <a href="#objectives">จุดมุ่งหมาย</a>
-        <a href="#plan">แผนการสอน</a>
-        <a href="#assessment">การประเมินผล</a>
-      </div>
-    </nav>
+  <main class="game-container">
+    <h1>Japanese Language Game</h1>
+    <p class="subtitle">Choose the correct meaning of the Japanese word.</p>
 
-    <div class="hero">
-      <div class="badge">รายวิชา มคอ.3 • ฟิสิกส์สำหรับนักศึกษาวิศวกรรม</div>
-      <h1>ฟิสิกส์มูลฐานสำหรับวิศวกร</h1>
-      <p class="subtitle">รายวิชาที่มุ่งพัฒนาความเข้าใจพื้นฐานทางฟิสิกส์ การคิดวิเคราะห์ และการประยุกต์ใช้ความรู้ในงานวิศวกรรมและชีวิตประจำวัน</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#about">ดูข้อมูลรายวิชา</a>
-        <a class="btn btn-secondary" href="#plan">ดูแผนการเรียน</a>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <div class="quick-info">
-      <div class="info-card"><span>รหัสรายวิชา</span><strong>FUNSC115</strong></div>
-      <div class="info-card"><span>ชื่อภาษาอังกฤษ</span><strong>Fundamental of Physics for Engineers</strong></div>
-      <div class="info-card"><span>จำนวนหน่วยกิต</span><strong>4(3-3-7)</strong></div>
-      <div class="info-card"><span>ภาคเรียน / ปีการศึกษา</span><strong>2 / 2568</strong></div>
+    <div class="level-select">
+      <label for="level">Level: </label>
+      <select id="level">
+        <option value="easy">Easy: Hiragana & Basic Words</option>
+        <option value="medium">Medium: Daily Vocabulary</option>
+        <option value="hard">Hard: Grammar Meaning</option>
+      </select>
     </div>
 
-    <section id="about">
-      <div class="section-title"><div class="icon">01</div><h2>ข้อมูลทั่วไปของรายวิชา</h2></div>
-      <div class="grid-2">
-        <div>
-          <p><strong>คำอธิบายรายวิชา:</strong> ศึกษาและปฏิบัติการเกี่ยวกับความรู้พื้นฐานทางฟิสิกส์ หน่วยทางฟิสิกส์ ปริมาณสเกลาร์ ปริมาณเวกเตอร์ การเคลื่อนที่ของวัตถุ กฎการเคลื่อนที่ของนิวตัน งาน พลังงาน กำลัง โมเมนตัมและการชน การเคลื่อนที่ของวัตถุแข็งเกร็ง คุณสมบัติของของไหล และหลักการเบื้องต้นของอุณหพลศาสตร์</p>
-          <p><strong>สถานที่เรียน:</strong> ลำปาง</p>
-          <p><strong>รายวิชาที่ต้องเรียนมาก่อน:</strong> ไม่มี</p>
-          <p><strong>รายวิชาที่ต้องเรียนพร้อมกัน:</strong> ไม่มี</p>
-        </div>
-        <div>
-          <h3>จำนวนชั่วโมงที่ใช้ต่อสัปดาห์</h3>
-          <div class="hours">
-            <div class="hour-box"><strong>3</strong>ชั่วโมงบรรยาย</div>
-            <div class="hour-box"><strong>3</strong>ชั่วโมงปฏิบัติ</div>
-            <div class="hour-box"><strong>7</strong>ชั่วโมงศึกษาด้วยตนเอง</div>
-          </div>
-        </div>
-      </div>
+    <section class="stats">
+      <div class="stat-card">Score: <span id="score">0</span></div>
+      <div class="stat-card">Question: <span id="questionNumber">1</span>/10</div>
+      <div class="stat-card">Best: <span id="bestScore">0</span></div>
     </section>
 
-    <section id="objectives">
-      <div class="section-title"><div class="icon">02</div><h2>จุดมุ่งหมายของรายวิชา</h2></div>
-      <ul class="objective-list">
-        <li>เข้าใจเรื่องเวกเตอร์ กฎการเคลื่อนที่ การเคลื่อนที่แบบต่าง ๆ งาน กำลัง พลังงาน โมเมนตัมและการชน</li>
-        <li>เข้าใจเรื่องการเคลื่อนที่ของวัตถุแข็งเกร็ง คุณสมบัติของของไหล และหลักการเบื้องต้นของอุณหพลศาสตร์</li>
-        <li>มีทักษะในการแก้ปัญหาโจทย์ทางวิทยาศาสตร์ สามารถวิเคราะห์และสรุปข้อมูลอย่างมีเหตุผล</li>
-        <li>ประยุกต์วิชาฟิสิกส์มูลฐานสำหรับวิศวกรกับชีวิตประจำวัน วิชาชีพ หรือเทคโนโลยีใหม่ ๆ ได้</li>
-        <li>มีเจตคติต่อวิทยาศาสตร์โดยใช้ความรู้ทางฟิสิกส์</li>
-      </ul>
+    <section class="question-box">
+      <p class="question-label">What does this mean?</p>
+      <div class="question" id="questionText">こんにちは</div>
+      <p class="hint" id="hintText">Select one answer below.</p>
     </section>
 
-    <section>
-      <div class="section-title"><div class="icon">03</div><h2>ผลการเรียนรู้ที่มุ่งพัฒนา</h2></div>
-      <ul class="pill-list">
-        <li>คุณธรรม จริยธรรม วินัย ความรับผิดชอบ และการเคารพสิทธิของผู้อื่น</li>
-        <li>ความรู้และความเข้าใจทั้งด้านทฤษฎีและหลักการปฏิบัติในเนื้อหาที่ศึกษา</li>
-        <li>ทักษะทางปัญญา การคิดอย่างเป็นระบบ และการประยุกต์ความรู้เพื่อแก้ปัญหา</li>
-        <li>ทักษะความสัมพันธ์ระหว่างบุคคล การทำงานเป็นทีม และการนำเสนอผลงาน</li>
-        <li>ทักษะการวิเคราะห์เชิงตัวเลข การสื่อสาร และการใช้เทคโนโลยีสารสนเทศ</li>
-      </ul>
-    </section>
+    <section class="choices" id="choices"></section>
 
-    <section id="plan">
-      <div class="section-title"><div class="icon">04</div><h2>แผนการสอนโดยสรุป</h2></div>
-      <div class="timeline">
-        <div class="week"><span class="num">สัปดาห์ 1-2</span><strong>ความรู้พื้นฐานและเวกเตอร์</strong><br />ปริมาณสเกลาร์ เวกเตอร์ การรวมเวกเตอร์ และการคูณเวกเตอร์</div>
-        <div class="week"><span class="num">สัปดาห์ 3-5</span><strong>แรงและการเคลื่อนที่</strong><br />ความเร็ว ความเร่ง การเคลื่อนที่แบบต่าง ๆ กฎของนิวตัน และสมดุล</div>
-        <div class="week"><span class="num">สัปดาห์ 6-7</span><strong>โมเมนตัม งาน และพลังงาน</strong><br />การดล การชน งาน กำลัง พลังงาน และกฎการอนุรักษ์พลังงาน</div>
-        <div class="week"><span class="num">สัปดาห์ 8-11</span><strong>วัตถุแข็งเกร็ง</strong><br />จุดศูนย์กลางมวล โมเมนตัมของระบบอนุภาค โมเมนตัมเชิงมุม และพลศาสตร์การหมุน</div>
-        <div class="week"><span class="num">สัปดาห์ 12</span><strong>การเคลื่อนที่แบบออสซิเลต</strong><br />สมการคลื่น การเคลื่อนที่แบบซิมเปิลฮาร์มอนิก เพนดูลัม และสปริง</div>
-        <div class="week"><span class="num">สัปดาห์ 13-14</span><strong>กลศาสตร์ของไหล</strong><br />สมบัติเชิงกลของสาร สถิตศาสตร์ของไหล พลศาสตร์ของไหล ปาสคาล แบร์นูลี และความหนืด</div>
-        <div class="week"><span class="num">สัปดาห์ 15-16</span><strong>ความร้อนและอุณหพลศาสตร์</strong><br />ปริมาณความร้อน สมดุลความร้อน การถ่ายโอนความร้อน และอุณหพลศาสตร์เบื้องต้น</div>
-        <div class="week"><span class="num">สัปดาห์ 9 และ 17</span><strong>การสอบ</strong><br />สอบกลางภาคและสอบปลายภาคตามแผนการประเมินผล</div>
-      </div>
-    </section>
+    <p class="feedback" id="feedback"></p>
 
-    <section id="assessment">
-      <div class="section-title"><div class="icon">05</div><h2>การวัดและประเมินผล</h2></div>
-      <div class="assessment">
-        <div class="score-card"><div class="score">50%</div><strong>สอบกลางภาคและปลายภาค</strong><p>ประเมินความเข้าใจในหลักการ ทฤษฎี และการแก้โจทย์ทางฟิสิกส์</p></div>
-        <div class="score-card"><div class="score">40%</div><strong>รายงาน งาน และแบบฝึกหัด</strong><p>ประเมินจากรายงานปฏิบัติการ งานที่มอบหมาย ความรับผิดชอบงานกลุ่ม และการนำเสนอ</p></div>
-        <div class="score-card"><div class="score">10%</div><strong>การเข้าชั้นเรียนและพฤติกรรม</strong><p>ประเมินจากการเข้าชั้นเรียน การส่งงานตรงเวลา และการมีส่วนร่วมในกิจกรรมกลุ่ม</p></div>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-title"><div class="icon">06</div><h2>ทรัพยากรประกอบการเรียนการสอน</h2></div>
-      <ul class="resource-list">
-        <li>ฟิสิกส์ 1 ทบวงมหาวิทยาลัย</li>
-        <li>ฟิสิกส์พื้นฐานขั้นมหาวิทยาลัย โดย ฉันทนา อิสรางกูล ณ อยุธยา และอุไรวรรณ จุณภาค</li>
-        <li>Physics for Scientists and Engineers with Modern Physics, 9th Edition</li>
-        <li>ฟิสิกส์มหาวิทยาลัย โดย รศ.ก่องกัญจน์ ภัทรากาญจน์</li>
-        <li>โจทย์ประกอบการเรียนฟิสิกส์ โดย ผศ.จรัส บุณยธรรมา</li>
-        <li>เว็บไซต์แนะนำ: www.rmutphysics.com</li>
-      </ul>
-    </section>
-
-    <section>
-      <div class="section-title"><div class="icon">07</div><h2>การให้คำปรึกษาทางวิชาการ</h2></div>
-      <p>นักศึกษาสามารถขอคำปรึกษาและคำแนะนำทางวิชาการเป็นรายบุคคลตามช่วงเวลาที่กำหนด</p>
-      <div class="consult">
-        <span>วันพุธ เวลา 15.00 - 16.30 น.</span>
-        <span>อีเมล: Ood_turbo@hotmail.com</span>
-        <span>อีเมล: pan503@windowslive.com</span>
-      </div>
+    <section class="controls">
+      <button class="main-btn" id="nextBtn">Next</button>
+      <button class="secondary-btn" id="restartBtn">Restart</button>
     </section>
   </main>
 
-  <footer>
-    หน้าเว็บรายวิชา FUNSC115 ฟิสิกส์มูลฐานสำหรับวิศวกร • จัดทำเพื่อใช้เป็นหน้าแรกสำหรับนำเสนอข้อมูลรายวิชา
-  </footer>
+  <script>
+    const quizData = {
+      easy: [
+        { jp: "こんにちは", answer: "Hello", options: ["Hello", "Goodbye", "Thank you", "Sorry"] },
+        { jp: "ありがとう", answer: "Thank you", options: ["Thank you", "Excuse me", "Good night", "Please"] },
+        { jp: "ねこ", answer: "Cat", options: ["Dog", "Cat", "Bird", "Fish"] },
+        { jp: "いぬ", answer: "Dog", options: ["Dog", "Cat", "Horse", "Rabbit"] },
+        { jp: "みず", answer: "Water", options: ["Water", "Tea", "Milk", "Juice"] },
+        { jp: "ごはん", answer: "Rice / Meal", options: ["Rice / Meal", "Bread", "Meat", "Fruit"] },
+        { jp: "せんせい", answer: "Teacher", options: ["Student", "Teacher", "Doctor", "Friend"] },
+        { jp: "がくせい", answer: "Student", options: ["Student", "Teacher", "Child", "Parent"] },
+        { jp: "あさ", answer: "Morning", options: ["Morning", "Afternoon", "Evening", "Night"] },
+        { jp: "よる", answer: "Night", options: ["Morning", "Noon", "Night", "Weekend"] }
+      ],
+      medium: [
+        { jp: "駅（えき）", answer: "Station", options: ["School", "Station", "Hospital", "Library"] },
+        { jp: "会社（かいしゃ）", answer: "Company", options: ["Company", "Classroom", "Airport", "Restaurant"] },
+        { jp: "電車（でんしゃ）", answer: "Train", options: ["Car", "Train", "Bicycle", "Bus"] },
+        { jp: "買います", answer: "To buy", options: ["To buy", "To sell", "To read", "To write"] },
+        { jp: "食べます", answer: "To eat", options: ["To drink", "To eat", "To go", "To sleep"] },
+        { jp: "飲みます", answer: "To drink", options: ["To drink", "To see", "To listen", "To speak"] },
+        { jp: "高い", answer: "Expensive / Tall", options: ["Cheap", "Expensive / Tall", "Small", "Cold"] },
+        { jp: "安い", answer: "Cheap", options: ["Fast", "Cheap", "Heavy", "New"] },
+        { jp: "忙しい", answer: "Busy", options: ["Free", "Busy", "Easy", "Quiet"] },
+        { jp: "楽しい", answer: "Fun", options: ["Difficult", "Fun", "Boring", "Far"] }
+      ],
+      hard: [
+        { jp: "〜とき", answer: "When...", options: ["When...", "Because...", "Although...", "In order to..."] },
+        { jp: "〜と", answer: "When/if one action naturally leads to a result", options: ["When/if one action naturally leads to a result", "For the purpose of", "Before doing", "Without doing"] },
+        { jp: "〜ために", answer: "In order to / for the purpose of", options: ["In order to / for the purpose of", "Even though", "After doing", "Must not"] },
+        { jp: "〜のに", answer: "For doing / to do", options: ["For doing / to do", "Because of", "If possible", "Too much"] },
+        { jp: "〜てください", answer: "Please do...", options: ["Please do...", "Do not do...", "I want to do...", "I have done..."] },
+        { jp: "〜てもいいです", answer: "May do...", options: ["May do...", "Must do...", "Cannot do...", "Did not do..."] },
+        { jp: "〜てはいけません", answer: "Must not do...", options: ["Must not do...", "May do...", "Want to do...", "Have to do..."] },
+        { jp: "〜なければなりません", answer: "Must do...", options: ["Must do...", "May do...", "Do not do...", "Can do..."] },
+        { jp: "〜たことがあります", answer: "Have experienced doing...", options: ["Have experienced doing...", "Will do soon", "Must do", "Cannot do"] },
+        { jp: "〜ましょう", answer: "Let's do...", options: ["Let's do...", "Do not do...", "I did...", "I cannot do..."] }
+      ]
+    };
+
+    const questionText = document.getElementById("questionText");
+    const hintText = document.getElementById("hintText");
+    const choicesBox = document.getElementById("choices");
+    const feedback = document.getElementById("feedback");
+    const scoreText = document.getElementById("score");
+    const questionNumberText = document.getElementById("questionNumber");
+    const bestScoreText = document.getElementById("bestScore");
+    const nextBtn = document.getElementById("nextBtn");
+    const restartBtn = document.getElementById("restartBtn");
+    const levelSelect = document.getElementById("level");
+
+    let questions = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let answered = false;
+    let bestScore = Number(localStorage.getItem("japaneseGameBestScore")) || 0;
+
+    bestScoreText.textContent = bestScore;
+
+    function shuffle(array) {
+      return [...array].sort(() => Math.random() - 0.5);
+    }
+
+    function startGame() {
+      const level = levelSelect.value;
+      questions = shuffle(quizData[level]).slice(0, 10);
+      currentQuestionIndex = 0;
+      score = 0;
+      answered = false;
+      scoreText.textContent = score;
+      questionNumberText.textContent = 1;
+      feedback.textContent = "";
+      nextBtn.textContent = "Next";
+      showQuestion();
+    }
+
+    function showQuestion() {
+      answered = false;
+      feedback.textContent = "";
+      choicesBox.innerHTML = "";
+
+      const current = questions[currentQuestionIndex];
+      questionText.textContent = current.jp;
+      hintText.textContent = "Select the correct English meaning.";
+      questionNumberText.textContent = currentQuestionIndex + 1;
+
+      shuffle(current.options).forEach(option => {
+        const button = document.createElement("button");
+        button.className = "choice-btn";
+        button.textContent = option;
+        button.addEventListener("click", () => checkAnswer(button, option));
+        choicesBox.appendChild(button);
+      });
+    }
+
+    function checkAnswer(button, selectedAnswer) {
+      if (answered) return;
+      answered = true;
+
+      const correctAnswer = questions[currentQuestionIndex].answer;
+      const allButtons = document.querySelectorAll(".choice-btn");
+
+      allButtons.forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent === correctAnswer) {
+          btn.classList.add("correct");
+        }
+      });
+
+      if (selectedAnswer === correctAnswer) {
+        score++;
+        scoreText.textContent = score;
+        feedback.textContent = "Correct! よくできました！";
+        feedback.style.color = "#166534";
+      } else {
+        button.classList.add("wrong");
+        feedback.textContent = `Incorrect. The answer is: ${correctAnswer}`;
+        feedback.style.color = "#991b1b";
+      }
+    }
+
+    function nextQuestion() {
+      if (!answered) {
+        feedback.textContent = "Please choose an answer first.";
+        feedback.style.color = "#92400e";
+        return;
+      }
+
+      currentQuestionIndex++;
+
+      if (currentQuestionIndex < questions.length) {
+        showQuestion();
+      } else {
+        endGame();
+      }
+    }
+
+    function endGame() {
+      questionText.textContent = "Game Finished!";
+      hintText.textContent = `Your final score is ${score} out of ${questions.length}.`;
+      choicesBox.innerHTML = "";
+      feedback.style.color = "#1f2937";
+
+      if (score > bestScore) {
+        bestScore = score;
+        localStorage.setItem("japaneseGameBestScore", bestScore);
+        bestScoreText.textContent = bestScore;
+        feedback.textContent = "New best score! すばらしい！";
+      } else {
+        feedback.textContent = "Good job! Try again to improve your score.";
+      }
+
+      nextBtn.textContent = "Play Again";
+      answered = true;
+      currentQuestionIndex = questions.length - 1;
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (nextBtn.textContent === "Play Again") {
+        startGame();
+      } else {
+        nextQuestion();
+      }
+    });
+
+    restartBtn.addEventListener("click", startGame);
+    levelSelect.addEventListener("change", startGame);
+
+    startGame();
+  </script>
 </body>
 </html>
