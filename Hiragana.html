@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hiragana Learning Game</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7ff;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .game-box {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .hiragana {
+      font-size: 120px;
+      margin: 30px 0;
+      color: #2563eb;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    button {
+      font-size: 22px;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: #e0e7ff;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #c7d2fe;
+    }
+
+    .correct {
+      background: #86efac !important;
+    }
+
+    .wrong {
+      background: #fca5a5 !important;
+    }
+
+    .message {
+      font-size: 22px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .reset-btn {
+      margin-top: 25px;
+      background: #2563eb;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="game-box">
+    <h1>Hiragana Game</h1>
+    <p>Choose the correct Romaji.</p>
+
+    <div id="hiragana" class="hiragana">あ</div>
+
+    <div id="options" class="options"></div>
+
+    <div id="message" class="message"></div>
+
+    <button class="reset-btn" onclick="nextQuestion()">Reset</button>
+  </div>
+
+  <script>
+    const hiraganaList = [
+      { hira: "あ", romaji: "a" },
+      { hira: "い", romaji: "i" },
+      { hira: "う", romaji: "u" },
+      { hira: "え", romaji: "e" },
+      { hira: "お", romaji: "o" },
+
+      { hira: "か", romaji: "ka" },
+      { hira: "き", romaji: "ki" },
+      { hira: "く", romaji: "ku" },
+      { hira: "け", romaji: "ke" },
+      { hira: "こ", romaji: "ko" },
+
+      { hira: "さ", romaji: "sa" },
+      { hira: "し", romaji: "shi" },
+      { hira: "す", romaji: "su" },
+      { hira: "せ", romaji: "se" },
+      { hira: "そ", romaji: "so" },
+
+      { hira: "た", romaji: "ta" },
+      { hira: "ち", romaji: "chi" },
+      { hira: "つ", romaji: "tsu" },
+      { hira: "て", romaji: "te" },
+      { hira: "と", romaji: "to" },
+
+      { hira: "な", romaji: "na" },
+      { hira: "に", romaji: "ni" },
+      { hira: "ぬ", romaji: "nu" },
+      { hira: "ね", romaji: "ne" },
+      { hira: "の", romaji: "no" }
+    ];
+
+    let currentQuestion;
+    let answered = false;
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function nextQuestion() {
+      answered = false;
+      document.getElementById("message").textContent = "";
+
+      currentQuestion = hiraganaList[
+        Math.floor(Math.random() * hiraganaList.length)
+      ];
+
+      document.getElementById("hiragana").textContent = currentQuestion.hira;
+
+      let options = [currentQuestion.romaji];
+
+      while (options.length < 6) {
+        let randomItem = hiraganaList[
+          Math.floor(Math.random() * hiraganaList.length)
+        ];
+
+        if (!options.includes(randomItem.romaji)) {
+          options.push(randomItem.romaji);
+        }
+      }
+
+      options = shuffle(options);
+
+      const optionsBox = document.getElementById("options");
+      optionsBox.innerHTML = "";
+
+      options.forEach(option => {
+        const button = document.createElement("button");
+        button.textContent = option;
+        button.onclick = () => checkAnswer(button, option);
+        optionsBox.appendChild(button);
+      });
+    }
+
+    function checkAnswer(button, selectedAnswer) {
+      if (answered) return;
+
+      answered = true;
+
+      const buttons = document.querySelectorAll(".options button");
+
+      buttons.forEach(btn => {
+        if (btn.textContent === currentQuestion.romaji) {
+          btn.classList.add("correct");
+        }
+      });
+
+      if (selectedAnswer === currentQuestion.romaji) {
+        document.getElementById("message").textContent = "Correct!";
+      } else {
+        button.classList.add("wrong");
+        document.getElementById("message").textContent =
+          "Wrong! Correct answer is " + currentQuestion.romaji;
+      }
+    }
+
+    nextQuestion();
+  </script>
+</body>
+</html>
