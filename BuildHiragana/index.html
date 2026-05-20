@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hiragana Practice</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="practice-panel" aria-labelledby="app-title">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">Hiragana trainer</p>
+            <h1 id="app-title">Build the Japanese word</h1>
+          </div>
+          <div class="scoreboard" aria-label="Practice score">
+            <div>
+              <span id="score">0</span>
+              <small>correct</small>
+            </div>
+            <div>
+              <span id="streak">0</span>
+              <small>streak</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt-area">
+          <div class="kana-orbit" aria-hidden="true">
+            <span>あ</span>
+            <span>か</span>
+            <span>さ</span>
+            <span>た</span>
+            <span>な</span>
+          </div>
+          <div class="word-card">
+            <span class="label">Romaji</span>
+            <p id="romaji-word">arigatou</p>
+            <span id="meaning" class="meaning">thank you</span>
+          </div>
+        </div>
+
+        <section class="answer-builder" aria-labelledby="answer-title">
+          <div class="section-heading">
+            <h2 id="answer-title">Your answer</h2>
+            <button id="check-button" type="button">Check</button>
+          </div>
+          <div
+            id="answer-slots"
+            class="answer-slots"
+            aria-label="Drop hiragana into answer boxes"
+          ></div>
+
+          <div class="section-heading">
+            <h2>Hiragana tiles</h2>
+            <span id="tile-count">20 tiles</span>
+          </div>
+          <div
+            id="tile-bank"
+            class="tile-bank"
+            aria-label="Available hiragana tiles"
+          ></div>
+        </section>
+
+        <div id="feedback" class="feedback neutral" role="status" aria-live="polite">
+          Drop each hiragana into the box where it belongs, then press Check.
+        </div>
+
+        <div class="actions">
+          <button id="next-button" class="secondary" type="button">Next word</button>
+          <button id="clear-button" class="ghost" type="button">Clear answer</button>
+          <button id="hint-button" class="ghost" type="button">Show hint</button>
+        </div>
+      </section>
+
+      <aside class="side-panel" aria-label="Practice details">
+        <div class="progress-ring" aria-hidden="true">
+          <span id="accuracy">100%</span>
+        </div>
+        <div>
+          <h2>Today’s round</h2>
+          <p>
+            Practise common words one at a time. Drop tiles into specific
+            answer boxes, or tap tiles to place and remove them.
+          </p>
+        </div>
+        <div class="history">
+          <h3>Recent answers</h3>
+          <ul id="history-list">
+            <li>No answers yet.</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
